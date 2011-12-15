@@ -10,15 +10,8 @@ isAbd n = n < abd n
 abds :: Int -> [Int]
 abds n = filter isAbd [1..n]
 
-make_abd_map :: Int -> [Int] -> Map Int Bool
-make_abd_map n = fromList . maker [1..n]
-    where
-      maker [] _ = []
-      maker (x:xs) [] = (:) (x,False) $ maker xs []
-      maker (x:xs) (y:ys) = 
-        case x==y of
-          True  -> (:) (x,True)  $ maker xs ys
-          False -> (:) (x,False) $ maker xs (y:ys)
+make_abd_map :: [Int] -> Map Int Bool
+make_abd_map xs = fromList $ zip xs $ repeat True
 
 is_sum_of_two :: Map Int Bool -> Int -> Bool
 is_sum_of_two map n = check map n [1..(div n 2)]
@@ -36,5 +29,5 @@ is_sum_of_two map n = check map n [1..(div n 2)]
 main = do
     let n = 28123
     let l = abds n
-    let map = make_abd_map n l
+    let map = make_abd_map l
     print $ sum $ filter (not.is_sum_of_two map) $ [1..n]
