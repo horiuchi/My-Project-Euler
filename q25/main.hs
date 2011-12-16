@@ -3,9 +3,6 @@ module Main where
 fibs :: [Integer]
 fibs = 1: 1: zipWith (+) fibs (tail fibs)
 
-digits :: Integer -> Int
-digits = (+1).truncate.(logBase 10).fromInteger
-
 fib :: Int -> Integer
 fib = iter 1 0 0 1
     where
