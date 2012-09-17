@@ -30,9 +30,10 @@ letters 70 = length "seventy"
 letters 80 = length "eighty"
 letters 90 = length "ninety"
 
+letters 100 = length "hundred"
 letters 1000 = letters 1 + length "thousand"
 
-letters n | n >= 100 = letters (n `div` 100) + length "hundred" + rest (n `mod` 100)
+letters n | n >= 100 = letters (n `div` 100) + letters 100 + rest (n `mod` 100)
           | n >= 20  = letters ((n `div` 10) * 10) + letters (n `mod` 10)
              where
                rest 0 = 0
